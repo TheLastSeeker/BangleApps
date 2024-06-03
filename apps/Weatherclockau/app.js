@@ -158,9 +158,9 @@ function convertMphToKmh(mph) {
 function removeDigits(str) {
   // Find the index of "20" in the string
   let index = str.slice(-4, -2);
-  }  
   return str;
-}
+  }  
+  
 
 // Example usage:
 let inputString = s.date;
