@@ -155,16 +155,8 @@ function convertMphToKmh(mph) {
   return mph * 1.60934;
 }
 
-function removeDigits(str) {
-  // Find the index of "20" in the string
-  let index = str.slice(-4, -2);
-  return str;
-  }  
-  
 
 // Example usage:
-let inputString = s.date;
-let result = removeDigits(inputString);
 let windSpeedMph = s.wind || 0;
 let windSpeedKmh = convertMphToKmh(windSpeedMph);
 let srcIcons = s.src ? wDrawIcon(800) : getSun;
@@ -172,7 +164,7 @@ let srcWeather = s.icon ? srcIcons : getDummy;
 let fontTemp = s.wind ? "10%" : "20%";
 let fontWind = s.wind ? "10%" : "0%";
 let labelDay = s.day ? "THU" : "";
-let labelDate = s.date ? result : "";
+let labelDate = s.date ? "12/12/2024" : "";
 let windLabel = s.wind ? `${windSpeedKmh.toFixed(1)} km/h` : "00 km/h";
 var cLayout = new Layout({
   type:"v", c: [
@@ -180,6 +172,7 @@ var cLayout = new Layout({
     {type: "h", fillx: 1, c: [
       {type: "h", c: [
         {type:"txt", font:"10%", label:labelDay, id:"dow" },
+        {type:"txt", font:"10%", label: " ",  id:" " },
         {type:"txt", font:"10%", label:labelDate, id:"date" }
         ]},
       ]
