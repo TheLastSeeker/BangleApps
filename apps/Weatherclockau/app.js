@@ -172,7 +172,7 @@ let srcWeather = s.icon ? srcIcons : getDummy;
 let fontTemp = s.wind ? "10%" : "20%";
 let fontWind = s.wind ? "10%" : "0%";
 let labelDay = s.day ? "THU" : "";
-let labelDate = s.date ? formattedDate : "";
+let labelDate = s.date ? result : "";
 let windLabel = s.wind ? `${windSpeedKmh.toFixed(1)} km/h` : "00 km/h";
 var cLayout = new Layout({
   type:"v", c: [
