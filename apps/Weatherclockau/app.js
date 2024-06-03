@@ -157,14 +157,8 @@ function convertMphToKmh(mph) {
 
 function removeDigits(str) {
   // Find the index of "20" in the string
-  let index = str.split("/");
-  
-  // Check if "20" is found in the string
-  if (index !== -1) {
-    // Remove "20" from the string
-    str = str.slice(0, index) + str.slice(index + 2);
-  }
-  
+  let index = str.slice(-4, -2);
+  }  
   return str;
 }
 
