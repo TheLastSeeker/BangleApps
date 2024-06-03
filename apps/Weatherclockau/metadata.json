@@ -1,7 +1,7 @@
 {
   "id": "weatherClockAu",
-  "name": "Weather Clock AU",
-  "shortName": "Weather Clock AU",
+  "name": "Weather ClockAU",
+  "shortName": "Weather ClockAU",
   "version": "0.01",
   "description": "testing changes, A clock which displays current weather conditions (requires Gadgetbridge and Weather apps).",
   "icon": "app.png",
