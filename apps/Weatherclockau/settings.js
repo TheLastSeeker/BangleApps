@@ -1,5 +1,5 @@
 (function(back) {
-  const SETTINGS_FILE = "weatherClock.json";
+  const SETTINGS_FILE = "weatherClockAU.json";
 
   // Load settings file
   const storage = require('Storage');
