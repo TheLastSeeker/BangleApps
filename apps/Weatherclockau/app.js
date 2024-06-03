@@ -151,79 +151,57 @@ function wDrawIcon(code) {
   return img;
 }
 
-// Check if the environment has "split" function available
-function safeSplit(str, delimiter) {
-  if (typeof str === 'string' && str.split) {
-    return str.split(delimiter);
-  }
-  // Manual split implementation for environments without String.prototype.split
-  let parts = [];
-  let part = '';
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === delimiter) {
-      parts.push(part);
-      part = '';
-    } else {
-      part += str[i];
-    }
-  }
-  parts.push(part);
-  return parts;
-}
-
-function formatDate(dateStr) {
-  // Split the date string into components
-  let parts = safeSplit(dateStr, '/');
-  
-  // Extract month, day, and year
-  let month = parts[0] || '01'; // default to January if undefined
-  let day = parts[1] || '01'; // default to first day if undefined
-  let year = (parts[2] || '00').slice(-2); // default to '00' if undefined, and get the last two digits
-  
-  // Reassemble the date string in MM/DD/YY format
-  return month + '/' + day + '/' + year;
-}
-
 function convertMphToKmh(mph) {
   return mph * 1.60934;
 }
 
-let rawDate = s.date || "12/12/2024";
-let formattedDate = formatDate(rawDate);
+function removeDigits(str) {
+  // Find the index of "20" in the string
+  let index = str.split("/");
+  
+  // Check if "20" is found in the string
+  if (index !== -1) {
+    // Remove "20" from the string
+    str = str.slice(0, index) + str.slice(index + 2);
+  }
+  
+  return str;
+}
+
+// Example usage:
+let inputString = s.date;
+let result = removeDigits(inputString);
 let windSpeedMph = s.wind || 0;
 let windSpeedKmh = convertMphToKmh(windSpeedMph);
-let srcIcons = s.src ? wDrawIcon(800) : getSun();
-let srcWeather = s.icon ? srcIcons : getDummy();
+let srcIcons = s.src ? wDrawIcon(800) : getSun;
+let srcWeather = s.icon ? srcIcons : getDummy;
 let fontTemp = s.wind ? "10%" : "20%";
 let fontWind = s.wind ? "10%" : "0%";
-let labelDay = s.day || "";
-let labelDate = formattedDate || "";
-let windLabel = s.wind ? windSpeedKmh.toFixed(1) + " km/h" : "00 km/h";
-
+let labelDay = s.day ? "THU" : "";
+let labelDate = s.date ? formattedDate : "";
+let windLabel = s.wind ? `${windSpeedKmh.toFixed(1)} km/h` : "00 km/h";
 var cLayout = new Layout({
-  type: "v",
-  c: [
-    { type: "txt", font: "35%", halign: 0, fillx: 1, pad: 8, label: "00:00", id: "time" },
-    { type: "h", fillx: 1, c: [
-        { type: "h", c: [
-          { type: "txt", font: "10%", label: labelDay, id: "dow" },
-          { type: "txt", font: "10%", label: labelDate, id: "date" }
-        ]}
+  type:"v", c: [
+    {type:"txt", font:"35%", halign: 0, fillx:1, pad: 8, label:"00:00", id:"time" },
+    {type: "h", fillx: 1, c: [
+      {type: "h", c: [
+        {type:"txt", font:"10%", label:labelDay, id:"dow" },
+        {type:"txt", font:"10%", label:labelDate, id:"date" }
+        ]},
       ]
     },
-    { type: "h", valign: 1, fillx: 1, c: [
-        { type: "img", filly: 1, pad: 8, id: "wIcon", src: srcWeather },
-        { type: "v", fillx: 1, c: [
-            { type: "h", c: [
-              { type: "txt", font: fontTemp, id: "temp", label: "000 °C" }
-            ]},
-            { type: "h", c: [
-              { type: "txt", font: fontWind, id: "wind", label: windLabel }
-            ]}
-          ]
-        }
-      ]}
-  ]
+    {type: "h", valign : 1, fillx:1, c: [
+      {type: "img", filly: 1, pad: 8, id: "wIcon", src: srcWeather},
+      {type: "v", fillx:1, c: [
+          {type: "h", c: [
+            {type: "txt", font: fontTemp, id: "temp", label: "000 °C"},
+          ]},
+          {type: "h", c: [
+            {type: "txt", font: fontWind, id: "wind", label: windLabel},
+          ]}
+        ]
+      },
+    ]}]
 });
 
 g.clear();
