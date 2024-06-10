@@ -104,10 +104,32 @@ function queueDraw() {
 }
 
 function draw() {
-  var date = new Date();
   cLayout.time.label = locale.time(date, 1);
   cLayout.dow.label = s.day ? locale.dow(date, 1).toUpperCase() + " " : "";
-  cLayout.date.label = s.date ? locale.date(date, 1).toUpperCase() : "";
+  //cLayout.date.label = s.date ? locale.date(date, 1).toUpperCase() : "";
+  // Function to convert the date format from "01/01/2024" to "01/01/24"
+  function convertDateFormat(dateString) {
+    // Use a regular expression to capture the date components
+    const dateMatch = dateString.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+
+    if (dateMatch) {
+        const day = dateMatch[1];
+        const month = dateMatch[2];
+        const year = dateMatch[3].slice(-2); // Get the last two digits of the year
+
+        // Construct the new date string
+        const formattedDate = `${day}/${month}/${year}`;
+        return formattedDate;
+    }
+
+    // If the input does not match the expected format, return an error or original date
+    return dateString;
+  }
+
+// Example usage
+  const s = { date: "01/01/2024" };
+  const date = s.date ? convertDateFormat(s.date) : "";
+  const cLayout.date.label = { date: { label: date.toUpperCase() } };
   let curr = w.get(); // Get weather from weather app.
   if(curr){
       const temp = locale.temp(curr.temp-273.15).match(/^(\D*\d*)(.*)$/);
@@ -122,7 +144,7 @@ function draw() {
       }
       const wind = locale.speed(curr.wind*1.60934).match(/^(\D*\d*)(.*)$/);
 	  //const wind = locale.speed(curr.wind).match(/^(\D*\d*)(.*)$/);
-	  cLayout.wind.label = wind[1] + "  " + "km/h" + " " + (curr.wrose||"").toUpperCase();
+	  cLayout.wind.label = wind[1] + " " + "km/h" + " " + (curr.wrose||"").toUpperCase();
       //cLayout.wind.label = wind[1] + " " + wind[2] + " " + (curr.wrose||"").toUpperCase();
   }
   else{

@@ -1,9 +1,7 @@
 # Weather Clock
 
 A clock which displays the current weather conditions. Time, day of week, date, temperature, wind speed, and an icon indicating the weather condition are displayed.
-
-As of Weather Clock v0.06 the date, day of week, temperature, weather icon and/or wind speed can be hidden in Settings. The icons can be changed to those of the Weather app.
-
+the date, day of week, temperature, weather icon and/or wind speed can be hidden in Settings. The icons can be changed to those of the Weather app.
 Standard widgets are displayed.
 
 ## Requirements
@@ -17,5 +15,6 @@ See the [Bangle.js Gadgetbridge documentation](https://www.espruino.com/Gadgetbr
 ![Screenshot2](screens/screen2.png)
 
 ## Creator
-
 James Gough
+## Remixer
+Seeker
