@@ -106,20 +106,9 @@ function queueDraw() {
 function draw() {
   cLayout.time.label = locale.time(date, 1);
   cLayout.dow.label = s.day ? locale.dow(date, 1).toUpperCase() + " " : "";
-  
   //cLayout.date.label = s.date ? locale.date(date, 1).toUpperCase() : "";
-  function convertDateFormat(dateString) {
-    const dateMatch = dateString.match(/^(\D*\d*)(.*)$/);
-    if (dateMatch) {
-        const day = dateMatch[1];
-        const month = dateMatch[2];
-        const year = dateMatch[3].slice(-2); // Get the last two digits of the year
-        const formattedDate = `${day}/${month}/${year}`;
-        return formattedDate;
-    }
-    return dateString;
-  }
-  cLayout.date.label = s.date ? convertDateFormat(s.date) : "";
+  const date = locale.date(date,1).match(/^(\D*\d*)(.*)$/);
+  cLayout.date.label = date[1] + " " + date[2].slice(-2);
   
   let curr = w.get(); // Get weather from weather app.
   if(curr){
