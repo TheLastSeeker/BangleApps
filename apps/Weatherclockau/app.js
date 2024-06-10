@@ -121,9 +121,9 @@ function draw() {
         cLayout.wIcon.src = s.icon ? showIconT : getDummy;
       }
       const wind = locale.speed(curr.wind*1.60934).match(/^(\D*\d*)(.*)$/);
-	  //const wind = locale.speed(curr.wind).match(/^(\D*\d*)(.*)$/);
+	  // const wind = locale.speed(curr.wind).match(/^(\D*\d*)(.*)$/);
 	  cLayout.wind.label = wind[1] + " " + "km/h" + " " + (curr.wrose||"").toUpperCase();
-      //cLayout.wind.label = wind[1] + " " + wind[2] + " " + (curr.wrose||"").toUpperCase();
+      // cLayout.wind.label = wind[1] + " " + wind[2] + " " + (curr.wrose||"").toUpperCase();
   }
   else{
       cLayout.temp.label = "Err";
