@@ -107,8 +107,6 @@ function draw() {
   cLayout.time.label = locale.time(date, 1);
   cLayout.dow.label = s.day ? locale.dow(date, 1).toUpperCase() + " " : "";
   cLayout.date.label = s.date ? locale.date(date, 1).toUpperCase() : "";
-  //const date = locale.date(date,1).match(/^(\D*\d*)(.*)$/);
-  //cLayout.date.label = date[1] + " " + date[2].slice(-2);
   
   let curr = w.get(); // Get weather from weather app.
   if(curr){
