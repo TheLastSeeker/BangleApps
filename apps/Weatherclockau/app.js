@@ -109,7 +109,7 @@ function draw() {
   
   //cLayout.date.label = s.date ? locale.date(date, 1).toUpperCase() : "";
   function convertDateFormat(dateString) {
-    const dateMatch = dateString.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    const dateMatch = dateString.match(/^(\D*\d*)(.*)$/);
     if (dateMatch) {
         const day = dateMatch[1];
         const month = dateMatch[2];
@@ -119,8 +119,7 @@ function draw() {
     }
     return dateString;
   }
-  const date = s.date ? convertDateFormat(s.date) : "";
-  const cLayout.date.label = { date: { label: date.toUpperCase() } };
+  cLayout.date.label = s.date ? convertDateFormat(s.date) : "";
   
   let curr = w.get(); // Get weather from weather app.
   if(curr){
