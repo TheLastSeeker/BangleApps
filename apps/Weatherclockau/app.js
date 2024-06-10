@@ -104,10 +104,10 @@ function queueDraw() {
 }
 
 function draw() {
+  var date = new Date();
   cLayout.time.label = locale.time(date, 1);
   cLayout.dow.label = s.day ? locale.dow(date, 1).toUpperCase() + " " : "";
   cLayout.date.label = s.date ? locale.date(date, 1).toUpperCase() : "";
-  
   let curr = w.get(); // Get weather from weather app.
   if(curr){
       const temp = locale.temp(curr.temp-273.15).match(/^(\D*\d*)(.*)$/);
@@ -120,10 +120,8 @@ function draw() {
         let showIconT = s.src ? wDrawIcon(curr.txt) : chooseIcon(curr.txt);
         cLayout.wIcon.src = s.icon ? showIconT : getDummy;
       }
-      const wind = locale.speed(curr.wind*1.60934).match(/^(\D*\d*)(.*)$/);
-	  // const wind = locale.speed(curr.wind).match(/^(\D*\d*)(.*)$/);
-	  cLayout.wind.label = wind[1] + " " + "km/h" + " " + (curr.wrose||"").toUpperCase();
-      // cLayout.wind.label = wind[1] + " " + wind[2] + " " + (curr.wrose||"").toUpperCase();
+      const wind = locale.speed(curr.wind*1.609).match(/^(\D*\d*)(.*)$/);
+      cLayout.wind.label = wind[1] + " " + "km/h" + " " + (curr.wrose||"").toUpperCase();
   }
   else{
       cLayout.temp.label = "Err";
@@ -153,14 +151,21 @@ function wDrawIcon(code) {
   return img;
 }
 
+function convertMphToKmh(mph) {
+  return mph * 1.60934;
+}
+
+
 // Example usage:
+let windSpeedMph = s.wind || 0;
+let windSpeedKmh = convertMphToKmh(windSpeedMph);
 let srcIcons = s.src ? wDrawIcon(800) : getSun;
 let srcWeather = s.icon ? srcIcons : getDummy;
 let fontTemp = s.wind ? "10%" : "20%";
 let fontWind = s.wind ? "10%" : "0%";
 let labelDay = s.day ? "THU" : "";
 let labelDate = s.date ? "12/12/2024" : "";
-let windLabel = s.wind ? "00 km/h" : "";
+let windLabel = s.wind ? `${windSpeedKmh.toFixed(1)} km/h` : "00 km/h";
 var cLayout = new Layout({
   type:"v", c: [
     {type:"txt", font:"35%", halign: 0, fillx:1, pad: 8, label:"00:00", id:"time" },
