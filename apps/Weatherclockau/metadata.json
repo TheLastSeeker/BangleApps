@@ -2,7 +2,7 @@
   "id": "Weatherclockau",
   "name": "Weather Clock AU",
   "shortName": "Weather Clock AU",
-  "version": "0.072",
+  "version": "0.073",
   "description": "testing changes, A clock which displays current weather conditions (requires Gadgetbridge and Weather apps).",
   "icon": "app.png",
   "dependencies": {"weather":"app"},
